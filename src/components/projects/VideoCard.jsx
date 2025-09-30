@@ -13,8 +13,7 @@ const VideoCard = ({ videoId, aspectRatio, index, isHovered, style, className })
   const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`
   const fallbackThumbnail = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`
 
-  // No entrance animation here - handled by parent motion.div in VideoGrid
-  // Keep this for any additional micro-animations if needed
+  // Hover animation for scale effect
   useGSAP(() => {
     if (cardRef.current && isHovered) {
       gsap.to(cardRef.current.querySelector('.video-inner'), {
@@ -42,11 +41,11 @@ const VideoCard = ({ videoId, aspectRatio, index, isHovered, style, className })
   return (
     <div
       ref={cardRef}
-      className={`relative ${aspectRatio || 'aspect-video'} w-full rounded-lg overflow-hidden transition-transform duration-300 ${className || ''}`}
+      className={`relative ${aspectRatio || 'aspect-video'} rounded-lg overflow-hidden transition-transform duration-300 ${className || ''}`}
       style={{
         ...style,
-        boxShadow: isHovered 
-          ? '0 25px 50px -12px rgba(0, 0, 0, 0.5)' 
+        boxShadow: isHovered
+          ? '0 25px 50px -12px rgba(0, 0, 0, 0.5)'
           : `
             rgba(0, 0, 0, 0.01) 0.796192px 0px 0.796192px 0px,
             rgba(0, 0, 0, 0.03) 2.41451px 0px 2.41451px 0px,
@@ -69,7 +68,7 @@ const VideoCard = ({ videoId, aspectRatio, index, isHovered, style, className })
             <img
               src={thumbnailUrl}
               alt={`Video ${index + 1} thumbnail`}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover object-left-top"
               onLoad={handleThumbnailLoad}
               onError={handleThumbnailError}
             />
@@ -108,7 +107,7 @@ const VideoCard = ({ videoId, aspectRatio, index, isHovered, style, className })
           />
         )}
 
-        {/* Subtle Hover Overlay - matching PortfolioGallery style */}
+        {/* Subtle Hover Overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
       </div>
     </div>

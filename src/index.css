@@ -2101,3 +2101,22 @@ iframe {
         font-family: font2, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     }
 }
+
+/* Marquee animation for mobile video carousel */
+@keyframes marquee {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(calc(-100% - var(--gap)));
+    }
+}
+
+.animate-marquee {
+    animation: marquee var(--duration) linear infinite;
+}
+
+/* Pause marquee on hover if enabled */
+.group:hover .group-hover\:paused {
+    animation-play-state: paused;
+}
